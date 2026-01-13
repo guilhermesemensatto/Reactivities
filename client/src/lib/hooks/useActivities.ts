@@ -4,7 +4,7 @@ import agent from "../api/agent";
 export const useActivities = () => {
     const queryClient = useQueryClient();
 
-    
+
     const { data: activities, isPending } = useQuery({
         queryKey: ['activities'],
         queryFn: async () => {
@@ -14,8 +14,19 @@ export const useActivities = () => {
     });
 
     const updateActivity = useMutation({
-        mutationFn: async(activity: Activity) => {
+        mutationFn: async (activity: Activity) => {
             await agent.put('/activities', activity)
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
+                queryKey: ['activities']
+            })
+        }
+    })
+
+    const createActivity = useMutation({
+        mutationFn: async (activity: Activity) => {
+            await agent.post('/activities', activity)
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries({
@@ -27,6 +38,7 @@ export const useActivities = () => {
     return {
         activities,
         isPending,
-        updateActivity
+        updateActivity,
+        createActivity
     }
 }

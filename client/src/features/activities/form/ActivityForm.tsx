@@ -36,7 +36,7 @@ export default function ActivityForm() {
     return (
         <Paper sx={{ borderRadius: 3, padding: 3 }}>
             <Typography variant="h5" gutterBottom color="primary">
-                Create Activity
+                {activity ? 'Edit Activity' : 'Create Activity'}
             </Typography>
             <Box component='form' onSubmit={handleSubmit} display='flex' flexDirection='column' gap={3}>
                 <TextField name='title' label='Tittle' defaultValue={activity?.title} />

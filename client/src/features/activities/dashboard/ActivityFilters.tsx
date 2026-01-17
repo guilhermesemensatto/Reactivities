@@ -5,7 +5,7 @@ import Calendar from "react-calendar";
 
 export default function ActivityFilters() {
     return (
-        <Box sx={{ display: 3, flexDirection: 'column', gap: 3, borderRadiusL: 3 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, borderRadius: 3 }}>
             <Paper sx={{ p: 3, borderRadius: 3 }}>
                 <Box sx={{ width: '100%' }}>
                     <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', mb: 1, color: 'primary.main' }}>

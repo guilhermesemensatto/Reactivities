@@ -9,7 +9,7 @@ export default function ActivityDashboard() {
         <Grid2 container spacing={3}>
             <Grid2 size={8}>
                 <ActivityList />
-            </Grid2>
+            </Grid2>            
             <Grid2 size={4}>
                 <ActivityFilters />
             </Grid2>

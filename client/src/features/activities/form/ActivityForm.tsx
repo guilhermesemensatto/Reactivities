@@ -1,4 +1,4 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { useActivities } from "../../../lib/hooks/useActivities";
 import { useParams } from "react-router";
 import { useForm } from 'react-hook-form';
@@ -9,6 +9,7 @@ import TextInput from "../../../app/shared/components/TextInput";
 import SelectInput from "../../../app/shared/components/SelectInput";
 import { categoryOptions } from "./categoryOptions";
 import DateTimeInput from "../../../app/shared/components/DateTimeInput";
+import LocationInput from "../../../app/shared/components/LocationInput";
 
 export default function ActivityForm() {
     const { control, reset, handleSubmit } = useForm<ActivitySchema>({
@@ -41,9 +42,9 @@ export default function ActivityForm() {
                     label='Category'
                     control={control}
                     name='category' />
-                <DateTimeInput label='Date' control={control} name='date' />
-                <TextInput label='City' control={control} name='city' />
-                <TextInput label='Venue' control={control} name='venue' />
+                <DateTimeInput label='Date' control={control as any} name='date' />
+
+                <LocationInput control={control} label='Enter the location' name="location"/>
                 <Box display='flex' justifyContent='end' gap={3}>
                     <Button color='inherit'>Cancel</Button>
                     <Button

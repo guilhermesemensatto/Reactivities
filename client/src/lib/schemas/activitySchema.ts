@@ -1,8 +1,5 @@
 import { z } from 'zod';
-
-const requiredString = (fieldName: string) => z
-    .string({ error: `${fieldName} is required` })
-    .min(1, { message: `${fieldName} is required` })
+import { requiredString } from '../util/util';
 
 export const activitySchema = z.object({
     title: requiredString('Title'),
@@ -17,7 +14,6 @@ export const activitySchema = z.object({
         latitude: z.coerce.number(),
         longitude: z.coerce.number()
     })
-
 })
 
 export type ActivitySchema = z.infer<typeof activitySchema>;

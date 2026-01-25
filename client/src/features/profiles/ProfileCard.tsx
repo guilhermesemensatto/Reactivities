@@ -22,7 +22,7 @@ export default function ProfileCard({ profile }: Props) {
                 <CardMedia
                     component={'img'}
                     src={profile?.imageUrl || '/images/user.png'}
-                    sx={{ width: 300, zIndex: 50 }}
+                    sx={{ width: 200, zIndex: 50 }}
                     alt={profile.displayName + ' image'}
                 />
                 <CardContent>
@@ -37,6 +37,6 @@ export default function ProfileCard({ profile }: Props) {
                     <Typography sx={{ ml: 1 }}>20 Followers</Typography>
                 </Box>
             </Card>
-        </Link> >
+        </Link>
   )
 }

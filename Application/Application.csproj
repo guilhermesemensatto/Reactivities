@@ -28,6 +28,7 @@
     <Folder Include="Core\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Profiles\" />
+    <Folder Include="Profiles\Commands\" />
     <Folder Include="Profiles\DTOs\" />
   </ItemGroup>
 

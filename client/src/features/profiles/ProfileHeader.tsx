@@ -1,6 +1,9 @@
 import { Avatar, Box, Button, Chip, Divider, Grid2, Paper, Stack, Typography } from "@mui/material";
 
-export default function ProfileHeader() {
+type Props = {
+  profile: Profile
+}
+export default function ProfileHeader({ profile }: Props) {
   const isFollowing = true;
 
   return (
@@ -8,9 +11,13 @@ export default function ProfileHeader() {
       <Grid2 container spacing={2}>
         <Grid2 size={8}>
           <Stack direction='row' spacing={3} alignItems='center'>
-            <Avatar sx={{ width: 150, height: 150 }} />
+            <Avatar
+              sx={{ width: 150, height: 150 }}
+              alt={profile.displayName + ' image'}
+              src={profile.imageUrl}
+            />
             <Box display='flex' flexDirection={'column'} gap={2}>
-              <Typography variant="h4">Display Name</Typography>
+              <Typography variant="h4">{profile.displayName}</Typography>
               {isFollowing && <Chip
                 variant="outlined"
                 color="secondary"

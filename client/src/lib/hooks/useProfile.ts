@@ -36,21 +36,43 @@ export const useProfile = (id?: string) => {
             await queryClient.invalidateQueries({
                 queryKey: ['photos', id]
             });
-            queryClient.setQueryData(['user'], (data: User) =>{
+            queryClient.setQueryData(['user'], (data: User) => {
                 if (!data) return data;
                 return {
-                    ...data, 
+                    ...data,
                     imageUrl: data.imageUrl ?? photo.url
                 }
             });
-            queryClient.setQueryData(['profile', id], (data: Profile) =>{
+            queryClient.setQueryData(['profile', id], (data: Profile) => {
                 if (!data) return data;
                 return {
-                    ...data, 
+                    ...data,
                     imageUrl: data.imageUrl ?? photo.url
                 }
             });
-            
+
+        }
+    })
+
+    const setMainPhoto = useMutation({
+        mutationFn: async (photo: Photo) => {
+            await agent.put(`/profiles/${photo.id}/setMain`);
+        },
+        onSuccess: (_, photo) => {
+            queryClient.setQueryData(['user'], (userData: User) => {
+                if (!userData) return userData;
+                return {
+                    ...userData,
+                    imageUrl: photo.url
+                }
+            });
+            queryClient.setQueryData(['profile', id], (profile: Profile) => {
+                if (!profile) return profile;
+                return {
+                    ...profile,
+                    imageUrl: photo.url
+                }
+            });
         }
     })
 
@@ -64,7 +86,8 @@ export const useProfile = (id?: string) => {
         photos,
         loadingPhotos,
         isCurrentUser,
-        uploadPhoto
+        uploadPhoto,
+        setMainPhoto
     }
 }
 

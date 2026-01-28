@@ -1,13 +1,18 @@
 import { CloudUpload } from "@mui/icons-material";
-import { Box, Grid2, Typography } from "@mui/material";
+import { Box, Button, Grid2, Typography } from "@mui/material";
 import { useCallback, useRef, useState } from "react";
 import { useDropzone } from 'react-dropzone'
 import Cropper, { type ReactCropperElement } from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
-export default function PhotoUploadWidget() {
+type Props = {
+    uploadPhoto: (file: Blob) => void
+    loading: boolean
+}
+
+export default function PhotoUploadWidget({ uploadPhoto, loading }: Props) {
     const [files, setFiles] = useState<object & { preview: string; }[]>([]);
-    //const cropperRef = useRef<ReactCropperElement>(null);
+    const cropperRef = useRef<ReactCropperElement>(null);
 
 
     const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -15,6 +20,13 @@ export default function PhotoUploadWidget() {
             preview: URL.createObjectURL(file as Blob)
         })))
     }, [])
+
+    const onCrop = useCallback(() => {
+        const cropper = cropperRef.current?.cropper;
+        cropper?.getCroppedCanvas().toBlob(blob => {
+            uploadPhoto(blob as Blob);
+        })
+    }, [uploadPhoto])
 
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -55,6 +67,7 @@ export default function PhotoUploadWidget() {
                         guides={false}
                         viewMode={1}
                         background={false}
+                        ref={cropperRef}
                     />}
             </Grid2>
             <Grid2 size={4}>
@@ -65,6 +78,15 @@ export default function PhotoUploadWidget() {
                             className="img-preview"
                             style={{ height: 300, width: 300, overflow: 'hidden' }}
                         />
+                        <Button
+                            sx={{ mt: 2 }}
+                            onClick={onCrop}
+                            variant="contained"
+                            color="secondary"
+                            disabled={loading}
+                        >
+                            Upload
+                        </Button>
                     </>
                 )}
             </Grid2>

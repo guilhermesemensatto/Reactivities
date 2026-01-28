@@ -36,7 +36,7 @@ export default function ProfileContent() {
           <Tab key={index} label={tab.label} sx={{ mr: 3 }} />
         ))}
       </Tabs>
-      <Box sx={{ flexGrow: 1, p: 3 }}>
+      <Box sx={{ flexGrow: 1, p: 3, pt: 0 }}>
         {tabContent[value].content}
       </Box>
     </Box>

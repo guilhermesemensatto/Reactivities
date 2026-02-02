@@ -1,23 +1,23 @@
 type Activity = {
-    id: string
-    title: string
-    date: date
-    description: string
-    category: string
-    isCancelled: boolean
-    city: string
-    venue: string
-    latitude: number
-    longitude: number
-    attendees: Profile[]
-    isGoing: boolean
-    isHost: boolean
-    hostId: string
-    hostDisplayName: string
-    hostImageUrl: string
-} 
+  id: string
+  title: string
+  date: date
+  description: string
+  category: string
+  isCancelled: boolean
+  city: string
+  venue: string
+  latitude: number
+  longitude: number
+  attendees: Profile[]
+  isGoing: boolean
+  isHost: boolean
+  hostId: string
+  hostDisplayName: string
+  hostImageUrl: string
+}
 
-type Profile ={
+type Profile = {
   id: string
   displayName: string
   bio?: string
@@ -32,6 +32,15 @@ type Photo = {
 type User = {
   id: string
   email: string
+  displayName: string
+  imageUrl?: string
+}
+
+type ChatComment = {
+  id: string
+  createdAt: Date
+  body: string
+  userId: string
   displayName: string
   imageUrl?: string
 }
